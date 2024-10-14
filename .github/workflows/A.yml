@@ -1,6 +1,6 @@
 on:
   pull_request_review_comment:
-    types: [deleted]
+    types: [deleted, created]
 
 jobs:
   test:
