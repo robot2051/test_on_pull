@@ -1,0 +1,9 @@
+on:
+  pull_request_review_comment:
+    types: [deleted]
+
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+      - run: echo "PoC"
