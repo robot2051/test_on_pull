@@ -1,3 +1,3 @@
-echo "Original values at approval!!"
+echo "TOCTOU ATTACK SUCCESS?"
 git rev-parse HEAD
 cat test_on_pull.md
