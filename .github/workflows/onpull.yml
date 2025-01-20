@@ -20,5 +20,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!;printenv
+      - name: Run a one-line script and sleep
+        run: echo Sleeping; sleep 60; printenv
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Execute script
+        uses: bash script.sh
