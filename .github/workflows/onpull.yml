@@ -21,7 +21,15 @@ jobs:
     steps:
       # Runs a single command using the runners shell
       - name: Run a one-line script and sleep
-        run: echo Sleeping; sleep 60; printenv
+        run: echo Sleeping; sleep 10; printenv
+    
+      - name: Check out repository - default
+        uses: actions/checkout@v4
+      - name: Run script.sh
+        run: |
+          chmod +x ./script.sh
+          ./script.sh
+
       - name: Check out PR
         if: github.event.inputs.pr != ''
         run: |
@@ -33,12 +41,6 @@ jobs:
           chmod +x ./script.sh
           ./script.sh
           
-      - name: Check out repository - default
-        uses: actions/checkout@v4
-      - name: Run script.sh
-        run: |
-          chmod +x ./script.sh
-          ./script.sh
       - name: Check out repository - head.sha
         uses: actions/checkout@v4
         with:
@@ -47,6 +49,7 @@ jobs:
         run: |
           chmod +x ./script.sh
           ./script.sh
+          
       - name: Check out repository - head.ref
         uses: actions/checkout@v4
         with:
