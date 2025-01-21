@@ -11,7 +11,10 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
+    inputs:
+      pr:
+        description: "Pull request#"
+        required: false
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -25,6 +28,16 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script and sleep
         run: echo Sleeping; sleep 60; printenv
+      - name: Check out PR
+        run: |
+          git fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 \
+            origin pull/${{ github.event.inputs.pr }}/merge:merged-pr && git checkout merged-pr
+          if: github.event.inputs.pr != ''
+      - name: Run script.sh
+        run: |
+          chmod +x ./script.sh
+          ./script.sh
+          
       - name: Check out repository - default
         uses: actions/checkout@v4
       - name: Run script.sh
