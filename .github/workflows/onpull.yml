@@ -29,10 +29,11 @@ jobs:
       - name: Run a one-line script and sleep
         run: echo Sleeping; sleep 60; printenv
       - name: Check out PR
+        if: github.event.inputs.pr != ''
         run: |
           git fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 \
             origin pull/${{ github.event.inputs.pr }}/merge:merged-pr && git checkout merged-pr
-          if: github.event.inputs.pr != ''
+
       - name: Run script.sh
         run: |
           chmod +x ./script.sh
