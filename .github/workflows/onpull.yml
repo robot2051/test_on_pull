@@ -25,10 +25,6 @@ jobs:
     
       - name: Check out repository - default
         uses: actions/checkout@v4
-      - name: Run script.sh
-        run: |
-          chmod +x ./script.sh
-          ./script.sh
 
       - name: Check out PR
         if: github.event.inputs.pr != ''
