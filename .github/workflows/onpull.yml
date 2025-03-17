@@ -32,7 +32,15 @@ jobs:
           git fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 \
             origin pull/${{ github.event.inputs.pr }}/merge:merged-pr && git checkout merged-pr
 
+    - name: Check if files has changed
+      id: updated_files
+      uses: tj-actions/changed-files@48d8f15b2aaa3d255ca5af3eba4870f807ce6b3c # v45
+      with:
+        files: |
+          ${{ inputs.environment }}/dontcare/**
+        
       - name: Run script.sh
+        if: steps.updated_files.outputs.any_changed == 'true'
         run: |
           chmod +x ./script.sh
           ./script.sh
